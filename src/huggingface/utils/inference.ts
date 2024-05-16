@@ -11,12 +11,10 @@ export class Inference extends HfInference {
   static getInstance(): Inference {
     try {
       this.logger.log(`Get Hugging Face Inference instance`);
-      console.log(this.instance);
-
-      if (this.instance) {
-        return this.instance;
+      if (!this.instance) {
+        this.instance = this.createInstance();
       }
-      return this.createInstance();
+      return this.instance;
     } catch (error) {
       this.logger.error(
         `Error while get Hugging Face Inference instance ` + error,
